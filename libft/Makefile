@@ -6,17 +6,17 @@
 #    By: kannie <kannie@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/14 19:49:47 by kannie            #+#    #+#              #
-#    Updated: 2021/11/15 15:19:49 by kannie           ###   ########.fr        #
+#    Updated: 2022/06/30 21:48:59 by kannie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libft.a
 
-GCC			=	gcc
+HEADER 		=	libft.h
 
-FLAG		=	-Wall -Wextra -Werror
+CC 			=	cc
 
-LIB			=	libft.h
+FLAGS 		=	-Wall -Werror -Wextra
 
 SRCS		=	ft_isalpha.c ft_isprint.c ft_memset.c  ft_bzero.c \
 				ft_isascii.c ft_memcpy.c ft_strlcpy.c ft_isalnum.c \
@@ -28,26 +28,31 @@ SRCS		=	ft_isalpha.c ft_isprint.c ft_memset.c  ft_bzero.c \
 				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 				ft_putnbr_fd.c ft_strmapi.c ft_itoa.c ft_split.c
 
-OBGS		=	${SRCS:.c=.o}
+SRCS_B		=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
+				ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
+				ft_lstmap.c ft_lstnew.c ft_lstsize.c
+				
+OBJ 		=	$(SRCS:%.c=%.o)
 
-RM			=	rm -f
+OBJ_B 		=	$(SRCS_B:%.c=%.o)
 
+all:		$(NAME)
 
-all:		${NAME}
+$(NAME):	$(OBJ) $(HEADER)
+			ar rcs $(NAME) $?
 
-${NAME}:	${OBGS} ${LIB}
-			ar rc ${NAME} ${OBGS}
-			ranlib ${NAME}
+%.o:		%.c $(HEADER)
+			$(CC) $(FLAGS) -c $< -o $@
 
-${OBGS}:	${LIB}
-			${GCC} ${FLAG} -c ${SRCS}
+bonus:		${OBJ_B}
+			@ar rcs ${NAME} ${OBJ_B}
 
-clean:		
-			${RM} ${OBGS}
+clean:
+			@rm -f $(OBJ) $(OBJ_B)
 
 fclean:		clean
-			${RM} ${NAME}
+			@rm -f $(NAME)
 
 re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		 all bonus clean fclean re

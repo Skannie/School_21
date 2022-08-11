@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 18:19:43 by kannie            #+#    #+#             */
-/*   Updated: 2021/10/26 20:33:57 by kannie           ###   ########.fr       */
+/*   Created: 2022/04/08 16:59:01 by kannie            #+#    #+#             */
+/*   Updated: 2022/06/22 16:13:49 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
+
+int	check_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
+			return (1);
+	}
+	return (0);
+}
 
 int	schar_v_int(const char *strok, int i, int minus)
 {
@@ -33,11 +48,11 @@ int	ft_atoi(const char *str)
 {
 	int				a;
 	int				minus;
-	unsigned int	b;
 
 	a = 0;
-	b = 0;
 	minus = 1;
+	if (check_str((char *)str) > 0)
+		return (-1);
 	while (str[a] == ' ' || str[a] == '\n' || str[a] == '\t'
 		|| str[a] == '\v' || str[a] == '\r' || str[a] == '\f')
 		a++;
@@ -49,11 +64,8 @@ int	ft_atoi(const char *str)
 			minus = 1;
 		a++;
 	}
-	if (str[a] >= 48 && str[a] <= 57)
-	{
-		b = schar_v_int(str, a, minus);
-		return (b);
-	}
+	if (str[a] >= '0' && str[a] <= '9')
+		return (schar_v_int(str, a, minus));
 	else
-		return (0);
+		return (-1);
 }

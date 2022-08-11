@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 13:17:16 by kannie            #+#    #+#             */
-/*   Updated: 2021/11/08 16:57:32 by kannie           ###   ########.fr       */
+/*   Created: 2022/06/30 18:48:29 by kannie            #+#    #+#             */
+/*   Updated: 2022/06/30 18:57:01 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	if (c >= 65 && c <= 90)
+	t_list	*clear;
+
+	while (*lst)
 	{
-		c = c + 32;
+		if ((*lst)->content)
+			del((*lst)->content);
+		clear = *lst;
+		*lst = (*lst)->next;
+		free (clear);
 	}
-	return (c);
+	lst = NULL;
 }

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 13:17:16 by kannie            #+#    #+#             */
-/*   Updated: 2021/11/08 16:57:32 by kannie           ###   ########.fr       */
+/*   Created: 2022/06/30 18:54:35 by kannie            #+#    #+#             */
+/*   Updated: 2022/06/30 18:58:20 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (c >= 65 && c <= 90)
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
-		c = c + 32;
+		f(lst->content);
+		lst = lst->next;
 	}
-	return (c);
 }

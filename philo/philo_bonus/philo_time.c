@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   philo_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 13:17:16 by kannie            #+#    #+#             */
-/*   Updated: 2021/11/08 16:57:32 by kannie           ###   ########.fr       */
+/*   Created: 2022/04/27 16:12:21 by kannie            #+#    #+#             */
+/*   Updated: 2022/06/24 16:24:41 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "philo.h"
 
-int	ft_tolower(int c)
+long long	time_to(void)
 {
-	if (c >= 65 && c <= 90)
-	{
-		c = c + 32;
-	}
-	return (c);
+	struct timeval	tm;
+	long long		time;
+
+	gettimeofday(&tm, NULL);
+	time = (tm.tv_sec * 1000 + tm.tv_usec / 1000);
+	return (time);
+}
+
+void	ft_sleep_philo(long long time_do)
+{
+	long long	time_now;
+
+	time_now = time_to();
+	while (time_do > (time_to() - time_now))
+		usleep(100);
 }

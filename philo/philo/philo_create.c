@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:07:18 by kannie            #+#    #+#             */
-/*   Updated: 2022/05/24 18:02:33 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/23 18:30:28 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	f_life(t_philo *philo)
 {
 	if (philo_check_dide(philo) == 1)
 		return ;
-	what_philo_do(philo, "36m is thinking", 0);
-	if (philo_check_dide(philo) == 1)
-		return ;
 	lock_fork(philo);
+	pthread_mutex_lock(philo->print_mutx);
+	philo->last_eat = time_to();
+	pthread_mutex_unlock(philo->print_mutx);
 	what_philo_do(philo, "35m is eating", philo->time_to_eat);
 	if (philo_check_dide(philo) == 1)
 	{
@@ -66,15 +66,15 @@ void	f_life(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(philo->print_mutx);
-	philo->last_eat = time_to();
-	pthread_mutex_unlock(philo->print_mutx);
-	pthread_mutex_lock(philo->print_mutx);
 	philo->nbr_eat++;
 	pthread_mutex_unlock(philo->print_mutx);
 	unlock_fork(philo);
 	if (philo_check_dide(philo) == 1)
 		return ;
 	what_philo_do(philo, "34m is sleeping", philo->time_to_sleep);
+	if (philo_check_dide(philo) == 1)
+		return ;
+	what_philo_do(philo, "36m is thinking", 0);
 }
 
 void	what_philo_do(t_philo *philo, char *str, int time_to_do)
