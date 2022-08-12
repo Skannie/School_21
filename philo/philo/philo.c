@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 16:30:18 by kannie            #+#    #+#             */
-/*   Updated: 2022/05/24 14:26:43 by kannie           ###   ########.fr       */
+/*   Updated: 2022/08/12 21:58:01 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 	t_waiter	waiter;
 	int			info;
 
+	waiter = (t_waiter){0};
 	info = 0;
 	if (argc >= 5 && argc <= 6)
 	{

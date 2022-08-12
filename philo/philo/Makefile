@@ -1,6 +1,6 @@
 NAME		=	philo
 
-CC			=	gcc
+CC			=	gcc -g -fsanitize=thread
 
 FLAGS		=	-Wall -Wextra -Werror
 HEADER		=	philo.h
