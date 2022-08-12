@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 22:50:27 by kannie            #+#    #+#             */
-/*   Updated: 2022/03/25 22:52:16 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/29 16:25:43 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,21 @@ int	max(int a, int b)
 	if (a < b)
 		return (b);
 	return (a);
+}
+
+t_stack	*init_stack(char **sstr, int flag)
+{
+	t_stack	*new;
+	t_stack	*res;
+	int		i;
+
+	i = 0;
+	res = NULL;
+	new = NULL;
+	res = split_stk(sstr, new, res, 0);
+	check_double(res);
+	if (flag == 0)
+		if (is_sorted(res))
+			exit(0);
+	return (res);
 }

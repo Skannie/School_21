@@ -6,7 +6,7 @@
 /*   By: kannie <kannie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:38:02 by kannie            #+#    #+#             */
-/*   Updated: 2022/03/26 18:31:15 by kannie           ###   ########.fr       */
+/*   Updated: 2022/06/29 16:25:51 by kannie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
-int			main(int argc, char **argv);
-t_stack		*init_stack(int nbr, char **sstr);
+t_stack		*init_stack(char **sstr, int flag);
 void		delete_stack(t_stack *stk);
 void		check_double(t_stack *stk);
 t_stack		*go_last(t_stack *stk);
@@ -61,5 +60,12 @@ void		there_b(t_stack **a, t_stack **b, int top, int down);
 void		back_th(t_stack **a, t_stack **b, int down, int top);
 int			ft_atoi(const char *str);
 int			schar_v_int(const char *strok, int i, int minus);
+int			colv_mas(char const *s, char c);
+void		free_mass(char **str);
+char		**zap_v_str(char **str, int i, char const *s, char c);
+char		**ft_split(char const *s, char c);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
+t_stack		*split_stk(char **argv, t_stack *new, t_stack *res, int i);
+void		spl_free(char **str);
 
 #endif //PUSH_SWAP

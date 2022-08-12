@@ -1,47 +1,53 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: kannie <kannie@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/10 20:38:08 by kannie            #+#    #+#              #
-#    Updated: 2022/03/26 17:56:37 by kannie           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME			=	push_swap
 
-NAME		=	push_swap
+BONUS_NAME		=	checker
 
-SRCS		=	push_swap.c push_swap_ps.c\
-				push_swap_r.c push_swap_rr.c\
-				push_swap_utils.c\
-				sort.c sort1.c sort2.c\
-				sort3.c
+SRCS			=	push_swap.c push_swap_ps.c\
+					push_swap_r.c push_swap_rr.c\
+					push_swap_utils.c\
+					sort.c sort1.c sort2.c\
+					sort3.c split.c split_utils.c
 
-HEADER		=	push_swap.h
+BONUS_SRCS		=	push_swap_bonus.c get_next_line.c\
+					get_next_line_utils.c push_swap_ps.c\
+					push_swap_r.c push_swap_rr.c\
+					sort.c sort1.c sort2.c\
+					sort3.c push_swap_utils.c\
+					split.c split_utils.c
 
-OBJS		=	${SRCS:%.c=%.o}
+HEADER			=	push_swap.h
 
-CC			=	gcc
+BONUS_HEADER	=	push_swap_bonus.h
 
-FLAGS		=	-Wall -Werror -Wextra
+OBJS			=	$(SRCS:%.c=%.o)
 
-RM			=	rm -f
+BONUS_OBJS		=	$(BONUS_SRCS:%.c=%.o)
 
-all:		$(NAME)
+CC				=	gcc
 
-%.o:		%.c $(HEADER)
-			$(CC) $(FLAGS) -c $< -o $@
+FLAGS			=	-Wall -Werror -Wextra
 
-$(NAME):	$(OBJS) $(HEADER)
-			$(CC) $(OBJS) -o $(NAME)
+RM				=	rm -f
+
+all:			$(NAME)
+
+%.o:			%.c $(HEADER)
+				$(CC) $(FLAGS) -c $< -o $@
+
+$(NAME):		$(OBJS) $(HEADER)
+				$(CC) $(OBJS) -o $(NAME)
 
 clean:
-			${RM} $(OBJS)
+				@$(RM) $(OBJS) $(BONUS_OBJS)
 
-fclean:		clean
-			$(RM) $(NAME)
+fclean:			clean
+				@$(RM) $(NAME) $(BONUS_NAME)
 
-re:			fclean all
+re:				fclean all
 
-.PHONY: all clean fclean re
+bonus:			$(BONUS_NAME)
+
+$(BONUS_NAME):	$(BONUS_OBJS) $(BONUS_HEADER)
+				$(CC) $(BONUS_OBJS) -o $(BONUS_NAME)
+
+.PHONY: all clean fclean re bonus
